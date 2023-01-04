@@ -12,7 +12,7 @@ echo "the jon name is : ${env.JOB_NAME}"
     stage('Build'){
     sh "${mavenHome}/bin/mvn clean package"           
     }
-    /*
+    
     stage('ExecutesonarqubeReport'){
      sh "${mavenHome}/bin/mvn sonar:sonar"                
     }
@@ -25,7 +25,7 @@ echo "the jon name is : ${env.JOB_NAME}"
     sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.39.242:/opt/apache-tomcat-9.0.70/webapps/"
       }
     }
-    */
+    
     }//try clossing
     catch(e){
     currentBuild.result = "FAILURE"
