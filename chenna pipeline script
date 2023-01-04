@@ -1,4 +1,9 @@
 node{
+echo "the jon name is : ${env.JOB_NAME}"
+   echo "the node name is : ${env.NODE_NAME}"
+   echo "the build number is : ${env.BUILD_NUMBER}"
+   echo "the jenkins home directory is : ${env.JENKINS_HOME}" 
+
      def mavenHome = tool name: "maven3.8.5"
     stage('CheckoutCode'){
         git credentialsId: '5f1f92e8-d0e0-4ec5-837a-af077e9fbed5', url: 'https://github.com/panduladdu/maven-web-application.git'
