@@ -1,0 +1,16 @@
+node{
+     def mavenHome = tool name: "maven3.8.5"
+    stage('CheckoutCode'){
+        git credentialsId: '5f1f92e8-d0e0-4ec5-837a-af077e9fbed5', url: 'https://github.com/panduladdu/maven-web-application.git'
+    }
+    stage('Build'){
+    sh "${mavenHome}/bin/mvn clean package"           
+    }
+    stage('ExecutesonarqubeReport'){
+     sh "${mavenHome}/bin/mvn sonar:sonar"                
+    }
+    
+    stage('uploadArtifactsIntoNexus'){
+    sh "${mavenHome}/bin/mvn deploy"
+    }
+    }
