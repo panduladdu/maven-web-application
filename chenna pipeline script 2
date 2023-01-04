@@ -7,9 +7,6 @@ pipeline{
  }
  
 
- options {
-   timestamps()
- }
  
  
  stages{
@@ -17,7 +14,7 @@ pipeline{
    //Checkout Code stage
    stage('CheckOutCode'){
    steps{
-       sendSlackNotifications("STARTED")
+      
    git credentialsId: '5f1f92e8-d0e0-4ec5-837a-af077e9fbed5', url: 'https://github.com/panduladdu/maven-web-application.git'
    }
    
@@ -28,67 +25,11 @@ pipeline{
    sh "mvn clean package"
    }
    }
-  //Execute SonarQube Report
-   stage('ExecuteSonarQubeReport'){
-   steps{
-    sh "mvn clean sonar:sonar"
-   }
-   }
-   
-   //Upload Artifacts into Nexus
-  stage('UploadArtifactsIntoNexus'){
-  steps{
-   sh "mvn clean deploy"
-  }
-  }
-  
-  //Deploy app into Tomcat Server
-  stage('DeployAppIntoTomcat'){
-  steps{
-  sshagent(['d4933a6f-0941-41e0-b9c3-56bd8d121a53']) {
-    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.39.242:/opt/apache-tomcat-9.0.70/webapps/" 
-  }
-  }
-  }
   
  }//stages closing
  
-  post {
-   success {
-     sendSlackNotifications(currentBuild.result)
-   }
-   failure {
-    sendSlackNotifications(currentBuild.result)
-   }
- }
+  
  
 }//pipeline closing
 
 
-//Slack Send Notifications function
-
-def sendSlackNotifications(String buildStatus = 'STARTED') {
-  // build status of null means successful
-  buildStatus =  buildStatus ?: 'SUCCESS'
-
-  // Default values
-  def colorName = 'RED'
-  def colorCode = '#FF0000'
-  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-  def summary = "${subject} (${env.BUILD_URL})"
-
-  // Override default values based on build status
-  if (buildStatus == 'STARTED') {
-    colorName = 'ORANGE'
-    colorCode = '#FFA500'
-  } else if (buildStatus == 'SUCCESS') {
-    colorName = 'GREEN'
-    colorCode = '#00FF00'
-  } else {
-    colorName = 'RED'
-    colorCode = '#FF0000'
-  }
-
-  // Send notifications
-  slackSend (color: colorCode, message: summary, channel: '#icicibank')
-}
