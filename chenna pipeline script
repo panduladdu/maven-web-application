@@ -29,7 +29,7 @@ echo "the jon name is : ${env.JOB_NAME}"
    
   } catch (e) {
    
-    currentBuild.result = "FAILED"
+    currentBuild.result = "FAILURE"
     
   } finally {
     sendSlackNotification(currentBuild.result)
