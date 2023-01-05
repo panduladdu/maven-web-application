@@ -35,7 +35,7 @@ echo "the jon name is : ${env.JOB_NAME}"
      send SlackNotification(currentBuild.result)
      }
     
-    }
+    
    
 //Slack Send Notifications function
 
