@@ -28,7 +28,7 @@ echo "the jon name is : ${env.JOB_NAME}"
     }
     }//try clossing
     }//try clossing
-    catch(e){
+    Catch(e){
     currentBuild.result = "FAILURE"
     }
     finally{
