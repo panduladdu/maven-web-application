@@ -26,15 +26,17 @@ echo "the jon name is : ${env.JOB_NAME}"
     sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.39.242:/opt/apache-tomcat-9.0.70/webapps/"
       }
     }
-    }//try clossing
-    }//try clossing
-    Catch(e){
-    currentBuild.result = "FAILURE"
-    }
-    Finally{
-     send SlackNotification(currentBuild.result)
-     }
+   
+  } catch (e) {
+   
+    currentBuild.result = "FAILED"
     
+  } finally {
+    sendSlackNotification(currentBuild.result)
+   
+  }
+}
+   
     
    
 //Slack Send Notifications function
