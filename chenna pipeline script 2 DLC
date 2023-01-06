@@ -11,9 +11,6 @@ triggers {
 options {
   timestamps()
 }
-options {
-  buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '3')
-}
 
 
 
