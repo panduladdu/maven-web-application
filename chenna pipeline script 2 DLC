@@ -8,6 +8,9 @@ pipeline{
  triggers {
   pollSCM '* * * * *'
 }
+options {
+  timestamps
+}
 
 stages{
  
