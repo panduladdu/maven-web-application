@@ -15,6 +15,9 @@ options {
   timestamps()
 }
 
+parameters {
+  choice choices: ['master', 'development', 'qatest', 'production '], description: 'select branch name', name: 'branchname'
+}
 
 
 stages{
