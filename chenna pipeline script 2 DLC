@@ -38,7 +38,7 @@ stages{
     sh "mvn clean sonar:sonar"
    }
    }
-   
+   /*
    //Upload Artifacts into Nexus
   stage('UploadArtifactsIntoNexus'){
   steps{
@@ -54,6 +54,7 @@ stages{
   }
   }
   }
+  */
 }//stages closing
 
 post {
