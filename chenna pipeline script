@@ -15,11 +15,11 @@ echo "the jon name is : ${env.JOB_NAME}"
     stage('Build'){
     sh "${mavenHome}/bin/mvn clean package"           
     }
-    
+    /*
     stage('ExecutesonarqubeReport'){
      sh "${mavenHome}/bin/mvn sonar:sonar"                
     }
-    /*
+    
     stage('uploadArtifactsIntoNexus'){
     sh "${mavenHome}/bin/mvn deploy"
     }
