@@ -1,16 +1,12 @@
 pipeline{
 
- //agent any
- agent{
-       label 'nodes'
-      }
+ agent any
+ 
  
  tools {
    maven 'maven3.8.6'
  }
-triggers {
-  pollSCM ('* * * * *')
-}
+
 options {
   timestamps()
 }
@@ -74,7 +70,7 @@ post {
  
  
 }//pipeline closing
-
+/*
 //Slack Send Notifications function
 
 def sendSlackNotifications(String buildStatus = 'STARTED') {
@@ -102,4 +98,4 @@ def sendSlackNotifications(String buildStatus = 'STARTED') {
   // Send notifications
   slackSend (color: colorCode, message: summary, channel: '#icicibank')
 }
-
+*/
